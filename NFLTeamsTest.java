@@ -9,38 +9,21 @@ public class NFLTeamsTest
   public static void main(String[] args)
   {
     // Set up Scanner Object for keyboard input.
-         Scanner keyboard = new Scanner(System.in);
+    Scanner keyboard = new Scanner(System.in);
          
     // Variable to hold menu choice.
+    // Variable to hold number of teams in NFL.
     int response = 0;
+    int nr = 0;
     
-                   
-    // Input information for NFL Team.
-    System.out.println("Input information for NFL Team:");
-    System.out.print("Name:             ");
-    String name = keyboard.nextLine();
+    // Create array of objects for all 32 NFL Teams.
+    NFLTeams[] teams = new NFLTeams[32];
     
-    System.out.print("Location:         ");
-    String location = keyboard.nextLine();
-    
-    System.out.print("Year Established: ");
-    int year = keyboard.nextInt();
-    
-    // Set up object of class NFLTeams.
-    NFLTeams team1 = new NFLTeams(name, location, year);
-    
-    // Print team information using .toString().
-    System.out.println("\nTeam information:\n" + team1 + "\n");
-    
-    // Clear keyboard buffer.
-    keyboard.nextLine();
-    
-         
     // Display menu.
     do
     {
-         System.out.println("1)  Change a NFL Team information:");
-         System.out.println("2)  Display current NFL Team information:");
+         System.out.println("1)  Create a NFL Team:");
+         System.out.println("2)  Display all NFL Team's information:");
          System.out.println("0)  Exit menu:");
          System.out.print("Enter menu choice:  ");
          response = keyboard.nextInt();
@@ -50,18 +33,40 @@ public class NFLTeamsTest
             case 1:
                System.out.println("\nMenu option #1 chosen.\n");
                
-               // Call to method.
-               changeTeam(team1);
+               // Clear keyboard buffer.
+               keyboard.nextLine();
                
-               // Print updated team information.
-               System.out.println("\n" + "The " + team1.getName() + " were established in " + team1.getLocation() + " in " + team1.getYear() + "." + "\n");
+               // Input information for NFL Team.
+               System.out.println("Input information for NFL Team:");
+               System.out.print("Name:             ");
+               String name = keyboard.nextLine();
+    
+               System.out.print("Location:         ");
+               String location = keyboard.nextLine();
+   
+               System.out.print("Year Established: ");
+               int year = keyboard.nextInt();
+    
+               // Set up object of class NFLTeams.
+               NFLTeams team1 = new NFLTeams(name, location, year);
+    
+               // Print team information using .toString().
+               System.out.println("\nTeam information:\n" + team1 + "\n");
+               
+               // Clear keyboard buffer.
+               keyboard.nextLine();
+               
+               // Store new team in array.
+               teams[nr] = team1;
+               nr++;
+
                break;
            
             case 2:
                System.out.println("\nMenu option #2 chosen.\n");
                
-               // Display updated .toString().
-               System.out.println("\nUpdated team information:\n" + team1 + "\n");
+               // Display array contents.
+               printArray(teams, nr);
                break;
            
             case 0:
@@ -76,6 +81,7 @@ public class NFLTeamsTest
     
   }
     // Method to change a team's information.
+    // Not in use yet...
     public static void changeTeam(NFLTeams team1)
     {
       // Set up Scanner Object for keyboard input.
@@ -94,5 +100,23 @@ public class NFLTeamsTest
       team1.setName(name);
       team1.setLocation(location);
       team1.setYear(year);
+    }
+    
+    // Method to print current contents of array.
+    public static void printArray(NFLTeams[] array, int nr)
+    {
+      // If empty, print output.
+      if(nr == 0)
+      {
+        System.out.println("List of NFL teams is empty.");
+      }
+      else
+      {
+        for(int ctr = 0; ctr < nr; ctr++)
+          {
+            System.out.println("Team[" + ctr + "] = " + "\n"+ array[ctr] + "\n");
+          }
+      }
+     
     }
 }
