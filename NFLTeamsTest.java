@@ -13,8 +13,10 @@ public class NFLTeamsTest
          
     // Variable to hold menu choice.
     // Variable to hold number of teams in NFL.
+    // Variable to hold team number for information change.
     int response = 0;
     int nr = 0;
+    int teamNr = 0;
     
     // Create array of objects for all 32 NFL Teams.
     NFLTeams[] teams = new NFLTeams[32];
@@ -24,6 +26,7 @@ public class NFLTeamsTest
     {
          System.out.println("1)  Create a NFL Team:");
          System.out.println("2)  Display all NFL Team's information:");
+         System.out.println("3)  Change a NFL Team's information:");
          System.out.println("0)  Exit menu:");
          System.out.print("Enter menu choice:  ");
          response = keyboard.nextInt();
@@ -59,7 +62,6 @@ public class NFLTeamsTest
                // Store new team in array.
                teams[nr] = team1;
                nr++;
-
                break;
            
             case 2:
@@ -67,7 +69,34 @@ public class NFLTeamsTest
                
                // Display array contents.
                printArray(teams, nr);
+               System.out.println("");
                break;
+               
+            case 3:
+               System.out.println("\nMenu option #3 chosen.\n");            
+        
+               // Display teams and menu.
+               displayTeams(teams, nr);
+               
+               // If empty, print output.
+               if(nr == 0)
+               {
+                 break;
+               }
+               else
+               {
+                 System.out.print("Enter team number to change:  ");
+                 teamNr = keyboard.nextInt();
+               
+                 // Call method to change team information.
+                 changeTeam(teams, teamNr);
+               
+                 // Print updated team information.
+                 System.out.println("\nUpdated team information:");
+                 System.out.print("Team[" + teamNr + "] = " + teams[teamNr] + "\n\n");  
+               }           
+               break;
+               
            
             case 0:
                System.out.println("\nExiting menu.\n");
@@ -82,7 +111,7 @@ public class NFLTeamsTest
   }
     // Method to change a team's information.
     // Not in use yet...
-    public static void changeTeam(NFLTeams team1)
+    public static void changeTeam(NFLTeams[] array, int teamNr)
     {
       // Set up Scanner Object for keyboard input.
       Scanner keyboard = new Scanner(System.in);
@@ -97,9 +126,9 @@ public class NFLTeamsTest
       System.out.print("Year Established: ");
       int year = keyboard.nextInt();
    
-      team1.setName(name);
-      team1.setLocation(location);
-      team1.setYear(year);
+      array[teamNr].setName(name);
+      array[teamNr].setLocation(location);
+      array[teamNr].setYear(year);
     }
     
     // Method to print current contents of array.
@@ -118,5 +147,31 @@ public class NFLTeamsTest
           }
       }
      
+    }
+    
+    // Method to display teams for updating information.
+    public static void displayTeams(NFLTeams[] array, int nr)
+    {
+      // If empty, print output.
+      if(nr == 0)
+      {
+        System.out.println("List of NFL teams is empty.\n");
+      }
+      else
+      {
+        for(int ctr = 0; ctr < nr; ctr++)
+          {
+            System.out.println("Team[" + ctr + "] = " + array[ctr].getName());
+          }
+      }
+     
+    }
+
+    
+    public static int countTeams(NFLTeams[] array)
+    {
+      int length = array.length;
+      
+      return length;
     }
 }
