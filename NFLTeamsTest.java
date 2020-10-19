@@ -110,7 +110,6 @@ public class NFLTeamsTest
     
   }
     // Method to change a team's information.
-    // Not in use yet...
     public static void changeTeam(NFLTeams[] array, int teamNr)
     {
       // Set up Scanner Object for keyboard input.
